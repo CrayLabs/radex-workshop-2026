@@ -16,8 +16,8 @@ git submodule update --init
 ```
 
 The examples shown in the workshop can be found in:
-- `repos/radex/example/`
-- `repos/rhapsody-plugins-openfoam/examples`
+- [repos/radex/example](https://github.com/radical-cybertools/radex/tree/64cba68d1952c79ebb502e9134686161642bd23b/example/)
+- [repos/rhapsody-openfoam-plugin/examples](https://github.com/CrayLabs/rhapsody-plugins-openfoam/tree/5ac3bbc7e2e928522223c38f8f75c845a21d3a4e/examples/)
 
 Please follow the directions for running at your site:
 
@@ -120,7 +120,7 @@ source /global/common/software/nstaff/lisa/training/smartsim/environment.sh
 salloc -A ntrain2 -C cpu -q shared -N 1 -c 2 -t 00:30:00 --reservation=smartsim_training
 ```
 
-*Note* If you need an exclusive CPU node for an example, you can request a different queue, for example 
+*Note* If you need an exclusive CPU node for an example, you can request a different queue, for example
 ```bash
 -q regular
 ```
