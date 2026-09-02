@@ -1,6 +1,30 @@
 # Radex Workshop 2026
 
-Materials for running workshop examples in 2026
+Users of the workshop can get access to all the repositories which contain the versions of
+radex, RHAPSODY, and rhapsody-openfoam-plugins used for the workshop. These also include the
+examples which will be used during the workshop. Note to get the contents of these repositories
+this one must be cloned recursively:
+
+```bash
+git clone --recursive https://github.com/CrayLabs/radex-workshop-2026.git
+```
+
+If you cloned down without recursive:
+```bash
+cd radex-workshop-2026
+git submodule update --init
+```
+
+The examples shown in the workshop can be found in:
+- `repos/radex/example/`
+- `repos/rhapsody-plugins-openfoam/examples`
+
+Please follow the directions for running at your site:
+
+- [OLCF Frontier & Odo](#running-on-olcf-frontier--odo)
+- [ALCF Aurora](#running-on-alcf-aurora)
+- [NERSC Perlmutter](#running-on-nersc-perlmutter)
+
 
 ## Running on OLCF Frontier & Odo
 
@@ -8,13 +32,13 @@ Materials for running workshop examples in 2026
 
 In order to set up your RHAPSODY/Dragon environment for Frontier, you need to execute the following:
 
-```
+```bash
 source /lustre/orion/stf007/world-shared/atramirez/rhapsody-training/environment.sh
 ```
 
 For Odo, execute the following:
 
-```
+```bash
 source /gpfs/wolf2/olcf/stf007/world-shared/rhapsody/environment.sh
 ```
 
@@ -53,7 +77,7 @@ qsub -I -q R8794691 -A alcf_training -l select=1,walltime=01:00:00,filesystems=h
 ```
 
 2. When running on a single node, it is recommanded to use the `-s` option for the Dragon launcher.
-For example, 
+For example,
 
 ```bash
 dragon -s my_script.py
