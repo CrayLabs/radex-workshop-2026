@@ -2,7 +2,7 @@
 
 Materials for running workshop examples in 2026
 
-## Running on Frontier
+## Running on OLCF Frontier & Odo
 
 ### Environment Setup
 
@@ -10,6 +10,12 @@ In order to set up your RHAPSODY/Dragon environment for Frontier, you need to ex
 
 ```
 source /lustre/orion/stf007/world-shared/atramirez/rhapsody-training/environment.sh
+```
+
+For Odo, execute the following:
+
+```
+source /gpfs/wolf2/olcf/stf007/world-shared/rhapsody/environment.sh
 ```
 
 ## Running on ALCF Aurora
