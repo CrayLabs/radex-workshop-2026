@@ -66,6 +66,7 @@ export SR_LOG_LEVEL=QUIET
 source /flare/catalyst/world_shared/bramesh/codes/OpenFOAM/OpenFOAM-v2606/etc/bashrc.aurora
 export FOAM_USER_LIBBIN=/flare/alcf_training/rhapsody/training_material/OpenFOAM-v2606
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/flare/alcf_training/rhapsody/training_material/OpenFOAM-v2606
+export OPENFOAM_CASE_DIR=/flare/alcf_training/rhapsody/training_material/OpenFOAM-v2606/rhapsody-plugins-openfoam/examples/openfoam-cases
 ```
 
 ### Running the Examples
@@ -76,14 +77,13 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/flare/alcf_training/rhapsody/training_m
 qsub -I -q R8794691 -A alcf_training -l select=1,walltime=01:00:00,filesystems=home:flare
 ```
 
-2. When running on a single node, it is recommanded to use the `-s` option for the Dragon launcher.
-For example,
+2. Set up the environment
 
 ```bash
-dragon -s my_script.py
-```
+source /flare/alcf_training/rhapsody/training_material/env_setup.sh
+``` 
 
-3. To run the `pitzDaily-optimize` workflow, copy the clean example directory available on `/flare/alcf_training/rhapsody` to your preferred location and launch the workflow with `dragon`.
+3. To run the `pitzDaily-optimize` workflow, copy the clean example directory available on `/flare/alcf_training/rhapsody` to your preferred location and launch the workflow with `dragon`. When running on a single node, it is recommanded to use the `-s` option for the Dragon launcher.
 
 ```bash
 cp -r /flare/alcf_training/rhapsody/training_material/pitzDaily-optimize /path/to/preferred/location
