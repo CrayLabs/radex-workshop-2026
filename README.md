@@ -76,8 +76,8 @@ source /gpfs/wolf2/olcf/stf007/world-shared/rhapsody/environment.sh
 
 Frontier
 ```bash
-cp -r /lustre/orion/stf007/world-shared/atramirez/rhapsody-training/rhapsody-plugins-openfoam/examples/pitzDaily-optimize /path/to/preferred/location
-cd /path/to/preferred/location/pitzDaily-optimize
+git clone https://github.com/CrayLabs/rhapsody-plugins-openfoam rhapsody-plugins-openfoam
+cd rhapsody-plugins-openfoam/examples/pitzDaily-optimize/
 dragon -s -- driver-staged.py
 ```
 
