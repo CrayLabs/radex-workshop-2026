@@ -42,6 +42,54 @@ For Odo, execute the following:
 source /gpfs/wolf2/olcf/stf007/world-shared/rhapsody/environment.sh
 ```
 
+### Running the Examples
+
+1. Get a compute node on Frontier or Odo with the following `salloc` command (one node is fine for the demo)
+
+```bash
+salloc -N1 -t 1:00:00 -A <your_project> 
+```
+
+2. Set up the environment
+
+Frontier
+```bash
+source /lustre/orion/stf007/world-shared/atramirez/rhapsody-training/environment.sh
+```
+
+Odo
+```bash
+source /gpfs/wolf2/olcf/stf007/world-shared/rhapsody/environment.sh
+```
+
+3. To run the `pitzDaily-optimize` workflow, copy the clean example directory available on `/lustre/orion/stf007/world-shared/atramirez/rhapsody-training` to your preferred location and launch the workflow with `dragon`. When running on a single node, it is recommended to use the `-s` option for the Dragon launcher.
+
+Frontier
+```bash
+cp -r /lustre/orion/stf007/world-shared/atramirez/rhapsody-training/rhapsody-plugins-openfoam/examples/pitzDaily-optimize /path/to/preferred/location
+cd /path/to/preferred/location/pitzDaily-optimize
+dragon -s -- driver-staged.py
+```
+
+Odo
+```bash
+cp -r /gpfs/wolf2/olcf/stf007/world-shared/rhapsody/rhapsody-plugins-openfoam/examples/pitzDaily-optimize /path/to/preferred/location
+cd /path/to/preferred/location/pitzDaily-optimize
+dragon -s -- driver-staged.py
+```
+
+You should expect to see something similar to the following output
+
+```
+Iteration 1: best parameters epsilon=30.8103, Cmu=0.138893, C1=1.02924, C2=1.88354; converged=True, final_step=346, avg_inlets=-2.36112, loss=0.212634
+Iteration 2: best parameters epsilon=25.7455, Cmu=0.124644, C1=1.02196, C2=2.05247; converged=True, final_step=287, avg_inlets=-2.03995, loss=0.0195871
+Iteration 3: best parameters epsilon=25.7455, Cmu=0.124644, C1=1.02196, C2=2.05247; converged=True, final_step=287, avg_inlets=-2.03995, loss=0.0195871
+Iteration 4: best parameters epsilon=24.751, Cmu=0.141403, C1=1.02382, C2=2.02487; converged=True, final_step=259, avg_inlets=-1.84032, loss=0.00356132
+Iteration 5: best parameters epsilon=24.751, Cmu=0.141403, C1=1.02382, C2=2.02487; converged=True, final_step=259, avg_inlets=-1.84032, loss=0.00356132
+Iteration 6: best parameters epsilon=59.42, Cmu=0.1328, C1=1.01623, C2=2.00049; converged=True, final_step=352, avg_inlets=-1.91198, loss=0.000143552
+```
+
+
 ## Running on ALCF Aurora
 
 ### Environment Setup
@@ -83,7 +131,7 @@ qsub -I -q R8794691 -A alcf_training -l select=1,walltime=01:00:00,filesystems=h
 source /flare/alcf_training/rhapsody/training_material/env_setup.sh
 ``` 
 
-3. To run the `pitzDaily-optimize` workflow, copy the clean example directory available on `/flare/alcf_training/rhapsody` to your preferred location and launch the workflow with `dragon`. When running on a single node, it is recommanded to use the `-s` option for the Dragon launcher.
+3. To run the `pitzDaily-optimize` workflow, copy the clean example directory available on `/flare/alcf_training/rhapsody` to your preferred location and launch the workflow with `dragon`. When running on a single node, it is recommended to use the `-s` option for the Dragon launcher.
 
 ```bash
 cp -r /flare/alcf_training/rhapsody/training_material/pitzDaily-optimize /path/to/preferred/location
