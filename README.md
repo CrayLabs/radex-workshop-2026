@@ -46,6 +46,16 @@ source /gpfs/wolf2/olcf/stf007/world-shared/rhapsody/environment.sh
 
 1. Get a compute node on Frontier or Odo with the following `salloc` command (one node is fine for the demo)
 
+Frontier
+```bash
+# optional reservation for registered users
+salloc --reservation=rhapsody -N1 -t 1:00:00 -A <your_project>
+
+# standard
+salloc -N1 -t 1:00:00 -A <your_project> 
+```
+
+Odo
 ```bash
 salloc -N1 -t 1:00:00 -A <your_project> 
 ```
