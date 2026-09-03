@@ -1,15 +1,45 @@
 # Radex Workshop 2026
 
-Materials for running workshop examples in 2026
+Users of the workshop can get access to all the repositories which contain the versions of
+radex, RHAPSODY, and rhapsody-openfoam-plugins used for the workshop. These also include the
+examples which will be used during the workshop. Note to get the contents of these repositories
+this one must be cloned recursively:
 
-## Running on Frontier
+```bash
+git clone --recursive https://github.com/CrayLabs/radex-workshop-2026.git
+```
+
+If you cloned down without recursive:
+```bash
+cd radex-workshop-2026
+git submodule update --init
+```
+
+The examples shown in the workshop can be found in:
+- [repos/radex/example](https://github.com/radical-cybertools/radex/tree/64cba68d1952c79ebb502e9134686161642bd23b/example/)
+- [repos/rhapsody-openfoam-plugin/examples](https://github.com/CrayLabs/rhapsody-plugins-openfoam/tree/5ac3bbc7e2e928522223c38f8f75c845a21d3a4e/examples/)
+
+Please follow the directions for running at your site:
+
+- [OLCF Frontier & Odo](#running-on-olcf-frontier--odo)
+- [ALCF Aurora](#running-on-alcf-aurora)
+- [NERSC Perlmutter](#running-on-nersc-perlmutter)
+
+
+## Running on OLCF Frontier & Odo
 
 ### Environment Setup
 
 In order to set up your RHAPSODY/Dragon environment for Frontier, you need to execute the following:
 
-```
+```bash
 source /lustre/orion/stf007/world-shared/atramirez/rhapsody-training/environment.sh
+```
+
+For Odo, execute the following:
+
+```bash
+source /gpfs/wolf2/olcf/stf007/world-shared/rhapsody/environment.sh
 ```
 
 ## Running on ALCF Aurora
@@ -36,6 +66,7 @@ export SR_LOG_LEVEL=QUIET
 source /flare/catalyst/world_shared/bramesh/codes/OpenFOAM/OpenFOAM-v2606/etc/bashrc.aurora
 export FOAM_USER_LIBBIN=/flare/alcf_training/rhapsody/training_material/OpenFOAM-v2606
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/flare/alcf_training/rhapsody/training_material/OpenFOAM-v2606
+export OPENFOAM_CASE_DIR=/flare/alcf_training/rhapsody/training_material/OpenFOAM-v2606/rhapsody-plugins-openfoam/examples/openfoam-cases
 ```
 
 ### Running the Examples
@@ -70,3 +101,47 @@ Iteration 4: best parameters epsilon=24.751, Cmu=0.141403, C1=1.02382, C2=2.0248
 Iteration 5: best parameters epsilon=24.751, Cmu=0.141403, C1=1.02382, C2=2.02487; converged=True, final_step=259, avg_inlets=-1.84032, loss=0.00356132
 Iteration 6: best parameters epsilon=59.42, Cmu=0.1328, C1=1.01623, C2=2.00049; converged=True, final_step=352, avg_inlets=-1.91198, loss=0.000143552
 ```
+
+## Running on NERSC Perlmutter
+
+### Environment Setup
+
+In order to set up your RHAPSODY/Dragon environment for Perlmutter, source the following script.
+
+```bash
+source /global/common/software/nstaff/lisa/training/smartsim/environment.sh
+```
+
+### Running the Examples
+
+1. Get a compute node on Perlmutter with the following salloc command (one node is fine for the demo)
+
+```bash
+salloc -A ntrain2 -C cpu -q shared -N 1 -c 2 -t 00:30:00 --reservation=smartsim_training
+```
+
+*Note* If you need an exclusive CPU node for an example, you can request a different queue, for example
+```bash
+-q regular
+```
+
+2. To run the `pitzDaily-optimize` workflow, follow the steps:
+
+```bash
+git clone https://github.com/CrayLabs/rhapsody-plugins-openfoam rhapsody-plugins-openfoam
+cd rhapsody-plugins-openfoam/examples/pitzDaily-optimize/
+dragon -s -- ./driver-staged.py
+```
+
+You should expect to see something similar to the following output
+
+```
+Iteration 1: best parameters epsilon=30.8103, Cmu=0.138893, C1=1.02924, C2=1.88354; converged=True, final_step=346, avg_inlets=-2.36112, loss=0.212634
+Iteration 2: best parameters epsilon=25.7455, Cmu=0.124644, C1=1.02196, C2=2.05247; converged=True, final_step=287, avg_inlets=-2.03995, loss=0.0195871
+Iteration 3: best parameters epsilon=25.7455, Cmu=0.124644, C1=1.02196, C2=2.05247; converged=True, final_step=287, avg_inlets=-2.03995, loss=0.0195871
+Iteration 4: best parameters epsilon=24.751, Cmu=0.141403, C1=1.02382, C2=2.02487; converged=True, final_step=259, avg_inlets=-1.84032, loss=0.00356132
+Iteration 5: best parameters epsilon=24.751, Cmu=0.141403, C1=1.02382, C2=2.02487; converged=True, final_step=259, avg_inlets=-1.84032, loss=0.00356132
+Iteration 6: best parameters epsilon=59.42, Cmu=0.1328, C1=1.01623, C2=2.00049; converged=True, final_step=352, avg_inlets=-1.91198, loss=0.000143552
+```
+
+*Note* When running on a single node, it is recommanded to use the `-s` option for the Dragon launcher, as seen in the example above.
