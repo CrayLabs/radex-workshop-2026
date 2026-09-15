@@ -72,24 +72,16 @@ Odo
 source /gpfs/wolf2/olcf/stf007/world-shared/rhapsody/environment.sh
 ```
 
-3. To run the `pitzDaily-optimize` workflow, copy the clean example directory available on `/lustre/orion/stf007/world-shared/atramirez/rhapsody-training` to your preferred location and launch the workflow with `dragon`. When running on a single node, it is recommended to use the `-s` option for the Dragon launcher.
+3. To run the `pitzDaily-optimize` workflow, clone the RHAPSODY OpenFOAM plugin to your preferred location and launch the workflow with `dragon`. When running on a single node, it is recommended to use the `-s` option for the Dragon launcher.
 
-Frontier
+For both Frontier & Odo
 ```bash
-cp -r /lustre/orion/stf007/world-shared/atramirez/rhapsody-training/rhapsody-plugins-openfoam/examples/pitzDaily-optimize /path/to/preferred/location
-cd /path/to/preferred/location/pitzDaily-optimize
-dragon -s -- driver-staged.py
-```
-
-Odo
-```bash
-cp -r /gpfs/wolf2/olcf/stf007/world-shared/rhapsody/rhapsody-plugins-openfoam/examples/pitzDaily-optimize /path/to/preferred/location
-cd /path/to/preferred/location/pitzDaily-optimize
+git clone https://github.com/CrayLabs/rhapsody-plugins-openfoam rhapsody-plugins-openfoam
+cd rhapsody-plugins-openfoam/examples/pitzDaily-optimize/
 dragon -s -- driver-staged.py
 ```
 
 You should expect to see something similar to the following output
-
 ```
 Iteration 1: best parameters epsilon=30.8103, Cmu=0.138893, C1=1.02924, C2=1.88354; converged=True, final_step=346, avg_inlets=-2.36112, loss=0.212634
 Iteration 2: best parameters epsilon=25.7455, Cmu=0.124644, C1=1.02196, C2=2.05247; converged=True, final_step=287, avg_inlets=-2.03995, loss=0.0195871
